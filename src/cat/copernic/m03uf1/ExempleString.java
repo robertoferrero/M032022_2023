@@ -4,6 +4,8 @@
  */
 package cat.copernic.m03uf1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author rferrero
@@ -47,5 +49,36 @@ public class ExempleString {
         else
             System.out.println(nom4 + " NO és igual a " + nom5);
         
+        String pais = "Regne Unit";
+        System.out.println(pais);
+        System.out.println(pais.toLowerCase());
+        System.out.println(pais.toUpperCase());
+        
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("Continuar (S/N)? ");
+        
+        String opcio = sc.nextLine();
+        
+        if (opcio.toLowerCase().equals("s")) 
+        {
+            System.out.println("Continuar");
+        }
+        else if (opcio.toUpperCase().equals("N"))
+        {
+            System.out.println("Sortir");
+        }
+        int posEspai = opcio.indexOf(" ");
+        //System.out.println("Cognom: " + opcio.substring(posEspai+1,posEspai+4));
+        System.out.println("Cognom: " + opcio.substring(3,7));
+        System.out.println(opcio.replace("a", "A"));
+        System.out.println(opcio.trim());
+        
+        double diners = 123.6;
+        System.out.println(String.valueOf(diners) + 3);
+        
+        
+        
+            
     }
 }
