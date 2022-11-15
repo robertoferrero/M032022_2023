@@ -44,7 +44,71 @@ public class ExercicisStrings4 {
 
         System.out.print("Introdueix un nombre hexadecimal: ");        
         String hexadecimal = sc.nextLine();
+        
         // Opció hexadecimal 1
+        decimal = 0;        
+        for (int i = 0; i < hexadecimal.length(); ++i)
+        {
+            if (hexadecimal.charAt(i) != '0')
+            {
+                int val = 0;
+                switch (hexadecimal.charAt(i))
+                {
+                    case '1':
+                        val = 1;
+                        break;
+                    case '2':
+                        val = 2;
+                        break;
+                    case '3':
+                        val = 3;
+                        break;
+                    case '4':
+                        val = 4;
+                        break;
+                    case '5':
+                        val = 5;
+                        break;
+                    case '6':
+                        val = 6;
+                        break;
+                    case '7':
+                        val = 7;
+                        break;
+                    case '8':
+                        val = 8;
+                        break;
+                    case '9':
+                        val = 9;
+                        break;
+                    case 'A':
+                        val = 10;
+                        break;
+                    case 'B':
+                        val = 11;
+                        break;
+                    case 'C':
+                        val = 12;
+                        break;
+                    case 'D':
+                        val = 13;
+                        break;
+                    case 'E':
+                        val = 14;
+                        break;
+                    case 'F':
+                        val = 15;
+                        break;
+
+                }
+                
+                decimal += val*(int)Math.pow( 16, hexadecimal.length() - 1 - i);
+            }
+        } 
+
+        
+        // Opció hexadecimal 2
+        /*
         decimal = 0;        
         for (int i = 0; i < hexadecimal.length(); ++i)
         {
@@ -64,8 +128,8 @@ public class ExercicisStrings4 {
                 decimal += val*(int)Math.pow( 16, hexadecimal.length() - 1 - i);
             }
         }        
-        
-        /* Opció hexadecimal 2
+        */
+        /* Opció hexadecimal 3
         for (int i = 0; i < hexadecimal.length(); ++i)
         {
             if (hexadecimal.charAt(i) != '0')
