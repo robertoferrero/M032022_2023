@@ -20,15 +20,16 @@ public class Ex13_NomesLletresEspaisOrdenats {
         String cadena = sc.nextLine();
         
         //
-        String resultado = "";        
+        String resultat = "";        
         for (int i = 0; i < cadena.length(); ++i)
         {
             char caracter = cadena.toUpperCase().charAt(i);
             
-            if ( Character.isLetter(caracter) ||                 
+            //if ( Character.isLetter(caracter) ||                 
+            if ( (caracter >= 'A' && caracter <= 'Z') ||
                   caracter == ' ')
                 
-                resultado += cadena.charAt(i);
+                resultat += cadena.charAt(i);
         }
         
         String cadenaInicial = cadena.substring(0,1);
@@ -42,6 +43,6 @@ public class Ex13_NomesLletresEspaisOrdenats {
         
         
         System.out.println("La cadena amb només lletres i espais ordenada és:");
-        System.out.println(resultado);
+        System.out.println(resultat);
     }
 }

@@ -18,5 +18,19 @@ public class Ex14_GeneraCorreu {
         
         String lletresProhibides  = "áàéèíïóòúüñç";
         String lletreAlternatives = "aaeeiioouunc";
+        
+        String lletra = "í";
+        String nomAlter = "";
+        int pos = 0;
+        pos = lletresProhibides.indexOf(lletra);
+        if (pos >= 0) // És prohibida
+            nomAlter = nomAlter + lletreAlternatives.charAt(pos);
+        else
+            nomAlter = nomAlter + lletra;
+        
+        System.out.println(nomAlter);
+            
+                
+                
     }
 }
