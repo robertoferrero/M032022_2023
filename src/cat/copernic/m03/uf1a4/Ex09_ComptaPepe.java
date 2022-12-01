@@ -19,15 +19,24 @@ public class Ex09_ComptaPepe {
         
         int comptador = 0;
         int pos = 0;
-        while(pos < frase.length())
+        
+        // Alternativa 1
+        while(pos != -1)
         {
-            int onEsta = frase.indexOf("pepe",pos);
-            
-            if (onEsta != -1) {
+            pos = frase.indexOf("pepe",pos);
+            if (pos != -1)
+            {
                 comptador++;
-                pos++;
+                pos++;                        
             }
         }
+
+        // Alternativa 2
+        //while( (pos = frase.indexOf("pepe",pos)) != -1 )
+        //{            
+        //   comptador++;
+        //    pos++;                        
+        //}
         
         System.out.println("La frase conté " +  comptador + 
                            " cops la seqüència \"pepe\".");
