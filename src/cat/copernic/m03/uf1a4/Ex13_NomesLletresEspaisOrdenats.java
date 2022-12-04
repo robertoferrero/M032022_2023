@@ -19,10 +19,15 @@ public class Ex13_NomesLletresEspaisOrdenats {
         for (int i = 1; i < prova.length(); ++i) {  
             String lletraAInsertar = prova.substring(i,i+1);
             int j = 0;
+            // Saltem tots els caràcters que estiguin alfabèticament abans del
+            // que volem insertar
             while(j < cadenaOrdenada.length() && 
                   lletraAInsertar.compareTo(cadenaOrdenada.substring(j)) > 0)
                 j++;
             
+            // Mirem si hem sortit perquè hem trobat una posició on insertar
+            // el caràcter o aquest és posterior alfabèticament i ha d'anar al
+            // final
             if (j < cadenaOrdenada.length())
                 cadenaOrdenada = cadenaOrdenada.substring(0,j) + lletraAInsertar + 
                         cadenaOrdenada.substring(j);
