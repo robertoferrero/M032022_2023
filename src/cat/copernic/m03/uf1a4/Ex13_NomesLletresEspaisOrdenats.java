@@ -30,15 +30,6 @@ public class Ex13_NomesLletresEspaisOrdenats {
                 cadenaOrdenada += lletraAInsertar;
         }
         
-        // Obtenim el total d'espais al principi de la cadena
-        int espais = 0 , index = 0;
-        while (cadenaOrdenada.charAt(index) == ' ')
-        {
-                ++espais;
-                ++index;
-        }
-        // Recol·loquem els espais al final
-        cadenaOrdenada = cadenaOrdenada.trim() + cadenaOrdenada.substring(0,espais);
         System.out.println(cadenaOrdenada);
     }
 
