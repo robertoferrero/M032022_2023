@@ -24,7 +24,7 @@ public class Ex176_CampoDeMinas {
             amplada = sc.nextInt();
             alcada  = sc.nextInt();
             
-            // Sortim si els dos valors són 0
+            // Sortim si qualsevol dels valors és 0
             if (amplada == 0 || alcada == 0)
                 break;
             
