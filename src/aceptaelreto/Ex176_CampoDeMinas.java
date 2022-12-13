@@ -25,7 +25,7 @@ public class Ex176_CampoDeMinas {
             alcada  = sc.nextInt();
             
             // Sortim si els dos valors són 0
-            if (amplada == 0 && alcada == 0)
+            if (amplada == 0 || alcada == 0)
                 break;
             
             boolean[][] tauler = new boolean[alcada][amplada];
