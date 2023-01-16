@@ -25,7 +25,9 @@ public class PatroDesbloqueig {
                 for (int j = 0; j < 2*columnes - 1; ++j)
                 {
                     if (i % 2 == 0  &&  j % 2 == 0)
-                        patroDesbloqueig[i][j] = '.';                    
+                        patroDesbloqueig[i][j] = '.';
+                    else
+                        patroDesbloqueig[i][j] = ' ';
                 }
             }
             
@@ -36,10 +38,43 @@ public class PatroDesbloqueig {
             
             String cadenaDesbloqueig = sc.nextLine();
             
+            //System.out.println("Cadena desbloqueig: " + cadenaDesbloqueig);
+            
+            // Comencem el camí
+            int x = 2*x0 - 2;
+            int y = 2*y0 - 2;
+            
+            patroDesbloqueig[x][y] = 'O';
+            for (int i = 0; i < cadenaDesbloqueig.length(); ++i) {
+                switch (cadenaDesbloqueig.charAt(i)) 
+                {
+                    case '1':
+                    case '2':
+                        patroDesbloqueig[x-1][y] = '|';
+                        x -= 2;
+                        break;
+                    case '3':
+                        if (patroDesbloqueig[x][y] == '\\')
+                            patroDesbloqueig[x-1][y+1] = 'X';
+                        else
+                            patroDesbloqueig[x-1][y+1] = '/';
+                        x -= 2;
+                        y += 2;
+                        break;
+                        
+                        
+                }
+                patroDesbloqueig[x][y] = 'O';
+            }
             
             
             // Patró desbloqueig
-            
+            for (int i = 0; i < patroDesbloqueig.length; ++i) {
+                for (int j = 0; j < patroDesbloqueig[0].length; ++j) {
+                    System.out.print(patroDesbloqueig[i][j]);
+                }
+                System.out.println("");
+            }
             
         }
 
