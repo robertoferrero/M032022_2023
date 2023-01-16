@@ -44,9 +44,28 @@ public class XifratRotatori {
         // Segon pas
         for (int i = 0; i < paraules.length; ++i) {
             char[] caracters = paraules[i].toCharArray();
+            
+            desplacament = 0;
+            do 
+            {
+                int posFinal = Math.min(N, caracters.length - desplacament);
+                char lletraInicial = caracters[desplacament];
+                for (int j = 0; j < posFinal - 1; ++j)
+                {
+                    caracters[j+desplacament] = caracters[j+1+desplacament];
+                }
+                caracters[posFinal-1+desplacament] = lletraInicial;
+
+                desplacament += N;
+
+            } while(desplacament < caracters.length);
+            paraules[i] = new String(caracters);
+            
         }
         
         // Mostra frase xifrada
+        // aquest és un exemple de frase que anem a xifrar amb el codi secret
+        // sé nu quaste ed rafes xeeplme neam a ueq mba le ifxarr ecsetr odci
         for (String paraula : paraules)
         {
             System.out.print(paraula + " ");
