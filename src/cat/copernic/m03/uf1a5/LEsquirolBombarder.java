@@ -70,6 +70,19 @@ public class LEsquirolBombarder {
         int posYLupin = tauler[0].length-1;
         tauler[posXLupin][posYLupin] = 'L';
         
+        // Posició de les bombes
+        for (int i = 0; i < TOTALBOMBES; i++) {
+            boolean posBombaCorrecte = false;
+            while (!posBombaCorrecte) {
+                int x = (int)(Math.random()*(tauler.length-1));
+                int y = (int)(Math.random()*(tauler[0].length-1));                
+                if (x > 0 && y > 0 && tauler[x][y] != '*') {
+                    tauler[x][y] = '*';
+                    posBombaCorrecte = true;
+                }
+            }
+        }
+        
         /* Mostrar el tauler */
         // Part superior
         for (int i = 0; i < COLUMNES; i++)        
