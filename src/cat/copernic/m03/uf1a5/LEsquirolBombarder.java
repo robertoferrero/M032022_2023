@@ -60,9 +60,15 @@ public class LEsquirolBombarder {
             }
         }
         
-        // Posició de l'Esquirol
+        // Posició inicial de l'Esquirol
+        int posXEsquirol = 0;
+        int posYEsquirol = 0;        
+        tauler[posXEsquirol][posYEsquirol] = 'E';
         
-        
+        // Posició inicial del Lupin
+        int posXLupin = tauler.length-1;
+        int posYLupin = tauler[0].length-1;
+        tauler[posXLupin][posYLupin] = 'L';
         
         /* Mostrar el tauler */
         // Part superior
