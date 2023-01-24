@@ -72,6 +72,7 @@ public class LEsquirolBombarder {
         tauler[posXLupin][posYLupin] = 'L';
         
         // Posició de les bombes
+        int[][] posicioBombes = new int[TOTALBOMBES][2];
         for (int i = 0; i < TOTALBOMBES; i++) {
             boolean posBombaCorrecte = false;
             while (!posBombaCorrecte) {
@@ -79,10 +80,14 @@ public class LEsquirolBombarder {
                 int y = (int)(Math.random()*(tauler[0].length-1));                
                 if (x > 0 && y > 0 && tauler[x][y] != '*') {
                     tauler[x][y] = '*';
+                    posicioBombes[i][0] = x;
+                    posicioBombes[i][1] = y;
                     posBombaCorrecte = true;
                 }
             }
         }
+        int totalBombesEsquirol = 0;
+        int indexBombaTriada = (int)(Math.random()*TOTALBOMBES);
         
         boolean finalPrograma = false;
         do {
@@ -146,7 +151,32 @@ public class LEsquirolBombarder {
                     finalPrograma = true;
                     break;
             }
+            
+            // Comprova si hi ha bomba en aquesta posició
+            if (tauler[posXEsquirol][posYEsquirol] == '*') {
+                System.out.println("Has agafat una bomba!!");
+                totalBombesEsquirol++;
+            }
+            
             tauler[posXEsquirol][posYEsquirol] = 'E';
+            
+            // Moviment Lupin            
+            if (Math.abs(posXLupin-posicioBombes[indexBombaTriada][0]) >
+                Math.abs(posYLupin-posicioBombes[indexBombaTriada][1])) {
+                // Diferència en files més gran
+                if (posXLupin > posicioBombes[indexBombaTriada][0])
+                    posXLupin--;
+                else
+                    posXLupin++;                
+            } else {
+                // Diferència en columnes més gran
+                if (posYLupin > posicioBombes[indexBombaTriada][1])
+                    posYLupin--;
+                else
+                    posYLupin++;                
+            }
+        
+            
             
             // Esborrem pantalla
             try {
