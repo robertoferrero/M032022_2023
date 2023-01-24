@@ -83,6 +83,8 @@ public class LEsquirolBombarder {
             }
         }
         
+        
+        
         /* Mostrar el tauler */
         // Part superior
         for (int i = 0; i < COLUMNES; i++)        
@@ -98,7 +100,30 @@ public class LEsquirolBombarder {
         // Part inferior
         for (int i = 0; i < COLUMNES; i++)        
             System.out.print("X");        
-        System.out.println("");        
+        System.out.println(""); 
+        
+        // Pregunta moviment l'esquirol
+        System.out.print("Cap a on vols moure? [w, a, s ,d]");
+        // Llegim el moviment com un char
+        // ??? Comprovar si realment ens han introduït un char (INTRO?)
+        char moviment = sc.nextLine().charAt(0);
+        
+        switch (moviment) {
+            case 'w':   // Up
+                break;
+            case 'a':   // Left
+                break;
+            case 's':   // Down
+                break;
+            case 'd':   // Right
+                break;
+            case 'e':   // Esquirol fa explotar una bomba
+                break;
+            case 't':   // Fer trampa
+                break;
+            case 'q':   // Sortir
+                break;
+        }
     }
     
 }
