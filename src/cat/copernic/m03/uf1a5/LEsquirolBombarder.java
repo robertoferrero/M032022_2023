@@ -6,6 +6,7 @@
 
 package cat.copernic.m03.uf1a5;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -146,6 +147,18 @@ public class LEsquirolBombarder {
                     break;
             }
             tauler[posXEsquirol][posYEsquirol] = 'E';
+            
+            // Esborrem pantalla
+            try {
+  		if (System.getProperty("os.name").contains("Windows")) {
+    		  new ProcessBuilder("cmd", "/c", "cls").
+                          inheritIO().start().waitFor();
+  		} else {
+    	    		System.out.print("\033[H\033[2J");
+    			System.out.flush();
+  		}
+            } catch (IOException | InterruptedException ex) {}
+            
         } while(!finalPrograma);
     }
     
