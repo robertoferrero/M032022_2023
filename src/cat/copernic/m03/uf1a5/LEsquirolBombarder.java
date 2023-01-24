@@ -83,47 +83,70 @@ public class LEsquirolBombarder {
             }
         }
         
-        
-        
-        /* Mostrar el tauler */
-        // Part superior
-        for (int i = 0; i < COLUMNES; i++)        
-            System.out.print("X");        
-        System.out.println("");
+        boolean finalPrograma = false;
+        do {
+            /* Mostrar el tauler */
+            // Part superior
+            for (int i = 0; i < COLUMNES; i++)        
+                System.out.print("X");        
+            System.out.println("");
 
-        for (int i = 0; i < FILES-2; i++) {
-            System.out.print("X");
-            for (int j = 0; j < COLUMNES-2; j++)
-                System.out.print(tauler[i][j]);            
-            System.out.println("X");
-        }
-        // Part inferior
-        for (int i = 0; i < COLUMNES; i++)        
-            System.out.print("X");        
-        System.out.println(""); 
-        
-        // Pregunta moviment l'esquirol
-        System.out.print("Cap a on vols moure? [w, a, s ,d]");
-        // Llegim el moviment com un char
-        // ??? Comprovar si realment ens han introduït un char (INTRO?)
-        char moviment = sc.nextLine().charAt(0);
-        
-        switch (moviment) {
-            case 'w':   // Up
-                break;
-            case 'a':   // Left
-                break;
-            case 's':   // Down
-                break;
-            case 'd':   // Right
-                break;
-            case 'e':   // Esquirol fa explotar una bomba
-                break;
-            case 't':   // Fer trampa
-                break;
-            case 'q':   // Sortir
-                break;
-        }
+            for (int i = 0; i < FILES-2; i++) {
+                System.out.print("X");
+                for (int j = 0; j < COLUMNES-2; j++)
+                    System.out.print(tauler[i][j]);            
+                System.out.println("X");
+            }
+            // Part inferior
+            for (int i = 0; i < COLUMNES; i++)        
+                System.out.print("X");        
+            System.out.println(""); 
+
+            // Pregunta moviment l'esquirol
+            System.out.print("Cap a on vols moure? [w, a, s ,d] ");
+            // Llegim el moviment com un char
+            // ??? Comprovar si realment ens han introduït un char (INTRO?)
+            char moviment = sc.nextLine().charAt(0);
+
+            switch (moviment) {
+                case 'w':   // Up
+                    if (posXEsquirol > 0 && 
+                        tauler[posXEsquirol-1][posYEsquirol] != 'L') {
+                        tauler[posXEsquirol][posYEsquirol] = ' ';
+                        posXEsquirol--;                        
+                    }                    
+                    break;
+                case 'a':   // Left
+                    if (posYEsquirol > 0 && 
+                        tauler[posXEsquirol][posYEsquirol-1] != 'L') {
+                        tauler[posXEsquirol][posYEsquirol] = ' ';
+                        posYEsquirol--;                        
+                    }                     
+                    break;
+                case 's':   // Down
+                    if (posXEsquirol < tauler.length-1 && 
+                        tauler[posXEsquirol+1][posYEsquirol] != 'L') {
+                        tauler[posXEsquirol][posYEsquirol] = ' ';
+                        posXEsquirol++;
+                    }
+                    break;
+                case 'd':   // Right
+                    if (posYEsquirol < tauler[0].length-1 && 
+                        tauler[posXEsquirol][posYEsquirol+1] != 'L') {
+                        tauler[posXEsquirol][posYEsquirol] = ' ';
+                        posYEsquirol++;                        
+                    }                                         
+                    break;
+                case 'e':   // Esquirol fa explotar una bomba
+                    break;
+                case 't':   // Fer trampa
+                    break;
+                case 'q':   // Sortir
+                    finalPrograma = true;
+                    break;
+            }
+            tauler[posXEsquirol][posYEsquirol] = 'E';
+        } while(!finalPrograma);
     }
     
 }
