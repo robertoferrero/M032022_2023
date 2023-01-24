@@ -86,6 +86,10 @@ public class LEsquirolBombarder {
                 }
             }
         }
+        int[] estatBombes = new int[TOTALBOMBES];
+        for (int i = 0; i < TOTALBOMBES; i++)
+            estatBombes[i] = -1;
+        
         int totalBombesEsquirol = 0;
         int indexBombaTriada = (int)(Math.random()*TOTALBOMBES);
         
@@ -160,7 +164,8 @@ public class LEsquirolBombarder {
             
             tauler[posXEsquirol][posYEsquirol] = 'E';
             
-            // Moviment Lupin            
+            // Moviment Lupin
+            tauler[posXLupin][posYLupin] = ' ';
             if (Math.abs(posXLupin-posicioBombes[indexBombaTriada][0]) >
                 Math.abs(posYLupin-posicioBombes[indexBombaTriada][1])) {
                 // Diferència en files més gran
@@ -175,6 +180,20 @@ public class LEsquirolBombarder {
                 else
                     posYLupin++;                
             }
+            if (tauler[posXLupin][posYLupin] == '*') {
+                // Activem bomba
+                int i;
+                for (i = 0; i < TOTALBOMBES; i++) {
+                    if (posicioBombes[i][0] == posXLupin && 
+                        posicioBombes[i][1] == posYLupin) {
+                        break;
+                    }
+                }
+                estatBombes[i] = (int)(Math.random()*5) + 5;
+                tauler[posXLupin][posYLupin] = (char)('0' + estatBombes[i]);
+                posYLupin--;                
+            } 
+            tauler[posXLupin][posYLupin] = 'L';
         
             
             
