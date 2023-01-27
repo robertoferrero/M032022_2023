@@ -116,7 +116,7 @@ public class LEsquirolBombarder {
                     tauler[posicioBombes[i][0]][posicioBombes[i][1]] = (char)('0' + estatBombes[i]);
                 }
             }
-            // Part superior
+            // Part superior tauler
             for (int i = 0; i < COLUMNES; i++)
                 System.out.print("X");
             System.out.println("");
@@ -189,12 +189,18 @@ public class LEsquirolBombarder {
             if (tauler[posXEsquirol][posYEsquirol] == '*') {
                 System.out.println("Has agafat una bomba!!");
                 totalBombesEsquirol++;
+                // modifiquem estat de la bomba a desactivada
+                for (int i = 0; i < posicioBombes.length; i++) {
+                    if(posicioBombes[i][0] == posXEsquirol && posicioBombes[i][1] == posYEsquirol) {
+                        estatBombes[i] = -2;   // -2 = desactivada
+                        break;
+                    }
+                }
             }
             
             tauler[posXEsquirol][posYEsquirol] = 'E';
             
-            /* Moviment Lupin
-            
+            /* Moviment Lupin            
                Només movem el Lupin si resten bombes desactivades
             */ 
             if (restenBombesDesactivades) {
@@ -258,10 +264,7 @@ public class LEsquirolBombarder {
 
                 } 
                 tauler[posXLupin][posYLupin] = 'L';
-            }
-        
-            
-
+            }                    
             
         } while(!finalPrograma);
     }
