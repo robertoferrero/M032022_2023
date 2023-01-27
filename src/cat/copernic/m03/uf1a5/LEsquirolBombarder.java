@@ -92,26 +92,55 @@ public class LEsquirolBombarder {
         
         int totalBombesEsquirol = 0;
         int indexBombaTriada = (int)(Math.random()*TOTALBOMBES);
+        boolean restenBombesDesactivades = true;
         
         boolean finalPrograma = false;
-        do {
+        do {            
+            // Esborrem pantalla
+            try {
+  		if (System.getProperty("os.name").contains("Windows")) {
+    		  new ProcessBuilder("cmd", "/c", "cls").
+                          inheritIO().start().waitFor();
+  		} else {
+    	    		System.out.print("\033[H\033[2J");
+    			System.out.flush();
+  		}
+            } catch (IOException | InterruptedException ex) {}
+
+            
             /* Mostrar el tauler */
+            // Abans hem de refrescar l'estat de les bombes actives
+            for (int i = 0; i < estatBombes.length; i++) {
+                if (estatBombes[i] > 0) {
+                    estatBombes[i]--;
+                    tauler[posicioBombes[i][0]][posicioBombes[i][1]] = (char)('0' + estatBombes[i]);
+                }
+            }
             // Part superior
-            for (int i = 0; i < COLUMNES; i++)        
-                System.out.print("X");        
+            for (int i = 0; i < COLUMNES; i++)
+                System.out.print("X");
             System.out.println("");
 
             for (int i = 0; i < FILES-2; i++) {
                 System.out.print("X");
                 for (int j = 0; j < COLUMNES-2; j++)
-                    System.out.print(tauler[i][j]);            
+                    System.out.print(tauler[i][j]);
                 System.out.println("X");
             }
             // Part inferior
-            for (int i = 0; i < COLUMNES; i++)        
-                System.out.print("X");        
-            System.out.println(""); 
+            for (int i = 0; i < COLUMNES; i++)
+                System.out.print("X");
+            System.out.println("");
 
+            // Comprovem si alguna bomba ha explotat
+            for (int i = 0; i < estatBombes.length; i++) {
+                if (estatBombes[i] == 0) {
+                    System.out.println("BOOM!");
+                    // ??? Modificar per preguntar si vol continuar
+                    System.exit(0);
+                }
+            }
+            
             // Pregunta moviment l'esquirol
             System.out.print("Cap a on vols moure? [w, a, s ,d] ");
             // Llegim el moviment com un char
@@ -164,49 +193,75 @@ public class LEsquirolBombarder {
             
             tauler[posXEsquirol][posYEsquirol] = 'E';
             
-            // Moviment Lupin
-            tauler[posXLupin][posYLupin] = ' ';
-            if (Math.abs(posXLupin-posicioBombes[indexBombaTriada][0]) >
-                Math.abs(posYLupin-posicioBombes[indexBombaTriada][1])) {
-                // Diferència en files més gran
-                if (posXLupin > posicioBombes[indexBombaTriada][0])
-                    posXLupin--;
-                else
-                    posXLupin++;                
-            } else {
-                // Diferència en columnes més gran
-                if (posYLupin > posicioBombes[indexBombaTriada][1])
-                    posYLupin--;
-                else
-                    posYLupin++;                
-            }
-            if (tauler[posXLupin][posYLupin] == '*') {
-                // Activem bomba
-                int i;
-                for (i = 0; i < TOTALBOMBES; i++) {
-                    if (posicioBombes[i][0] == posXLupin && 
-                        posicioBombes[i][1] == posYLupin) {
-                        break;
-                    }
+            /* Moviment Lupin
+            
+               Només movem el Lupin si resten bombes desactivades
+            */ 
+            if (restenBombesDesactivades) {
+                tauler[posXLupin][posYLupin] = ' ';
+                if (Math.abs(posXLupin-posicioBombes[indexBombaTriada][0]) >
+                    Math.abs(posYLupin-posicioBombes[indexBombaTriada][1])) {
+                    // Diferència en files més gran
+                    if (posXLupin > posicioBombes[indexBombaTriada][0])
+                        posXLupin--;
+                    else
+                        posXLupin++;                
+                } else {
+                    // Diferència en columnes més gran
+                    if (posYLupin > posicioBombes[indexBombaTriada][1])
+                        posYLupin--;
+                    else
+                        posYLupin++;                
                 }
-                estatBombes[i] = (int)(Math.random()*5) + 5;
-                tauler[posXLupin][posYLupin] = (char)('0' + estatBombes[i]);
-                posYLupin--;                
-            } 
-            tauler[posXLupin][posYLupin] = 'L';
+                if (tauler[posXLupin][posYLupin] == '*') {
+                    // Activem bomba
+                    int i;
+                    for (i = 0; i < TOTALBOMBES; i++) {
+                        if (posicioBombes[i][0] == posXLupin && 
+                            posicioBombes[i][1] == posYLupin) {
+                            break;
+                        }
+                    }
+                    estatBombes[i] = (int)(Math.random()*5) + 5;
+                    tauler[posXLupin][posYLupin] = (char)('0' + estatBombes[i]);
+                    // Lupin ha d'anar a cercar la següent bomba
+                    // Hi ha bombes encara desactivades?
+                    restenBombesDesactivades = false;
+                    for (int estat : estatBombes)
+                        if (estat == -1)
+                            restenBombesDesactivades = true;
+
+                    if (restenBombesDesactivades) {
+                        while (estatBombes[indexBombaTriada] != -1)
+                            indexBombaTriada = (int)(Math.random()*TOTALBOMBES);
+
+                        // Movem el Lupin cap a la següent bomba
+                        // FIXA'T QUE HE COPIAT ** EL MATEIX CODI ** QUE A DALT
+                        if (Math.abs(posXLupin-posicioBombes[indexBombaTriada][0]) >
+                            Math.abs(posYLupin-posicioBombes[indexBombaTriada][1])) {
+                            // Diferència en files més gran
+                            if (posXLupin > posicioBombes[indexBombaTriada][0])
+                                posXLupin--;
+                            else
+                                posXLupin++;                
+                        } else {
+                            // Diferència en columnes més gran
+                            if (posYLupin > posicioBombes[indexBombaTriada][1])
+                                posYLupin--;
+                            else
+                                posYLupin++;                
+                        }
+                    } else {
+                        posYLupin--;
+                        indexBombaTriada = -1;
+                    }
+
+                } 
+                tauler[posXLupin][posYLupin] = 'L';
+            }
         
             
-            
-            // Esborrem pantalla
-            try {
-  		if (System.getProperty("os.name").contains("Windows")) {
-    		  new ProcessBuilder("cmd", "/c", "cls").
-                          inheritIO().start().waitFor();
-  		} else {
-    	    		System.out.print("\033[H\033[2J");
-    			System.out.flush();
-  		}
-            } catch (IOException | InterruptedException ex) {}
+
             
         } while(!finalPrograma);
     }
