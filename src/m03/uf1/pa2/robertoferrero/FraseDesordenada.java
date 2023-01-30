@@ -39,7 +39,7 @@ public class FraseDesordenada {
         }
         
         // Mostra frase desordenada
-        System.out.print("Frase desordenada: ");
+        System.out.print("Frase desordenada   : ");
         for (String paraula : paraulesDesordenades)
             System.out.print(paraula + " ");
         System.out.println("");
@@ -51,7 +51,7 @@ public class FraseDesordenada {
             paraulesReordenades[posicions[i]] = paraulesDesordenades[i];
         
         // Mostra frase reordenada
-        System.out.print("Frase reordenada : ");
+        System.out.print("Frase reordenada    : ");
         for (String paraula : paraulesReordenades)
             System.out.print(paraula + " ");
         System.out.println("");
