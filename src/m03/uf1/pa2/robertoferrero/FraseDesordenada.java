@@ -58,7 +58,7 @@ public class FraseDesordenada {
         
         
         // Alternativa 2
-        /*System.out.print("Frase reordenada : ");
+        /*System.out.print("Frase reordenada    : ");
         for (int i = 0; i < posicions.length; ++i) {
             int pos = 0;
             while (posicions[pos] != i && pos < posicions.length)
