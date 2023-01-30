@@ -21,10 +21,13 @@ public class FraseDesordenada {
         
         String[] paraulesOriginal = fraseOriginal.split(" ");
         
-        String[] paraulesDesordenades = new String[paraulesOriginal.length];
+        
         int[] posicions = new int[paraulesOriginal.length];
         boolean[] posicionsOcupades = new boolean[paraulesOriginal.length];
         
+        
+        // Desordenem la frase
+        String[] paraulesDesordenades = new String[paraulesOriginal.length];
         for (int i = 0; i < paraulesOriginal.length; ++i) {
             boolean paraulaReubicada = false;
             while (!paraulaReubicada) {
@@ -57,14 +60,18 @@ public class FraseDesordenada {
         System.out.println("");
         
         
+        
         // Alternativa 2
-        /*System.out.print("Frase reordenada    : ");
+/*        
+        // Mostra frase reordenada
+        System.out.print("Frase reordenada    : ");
         for (int i = 0; i < posicions.length; ++i) {
             int pos = 0;
             while (posicions[pos] != i && pos < posicions.length)
                 pos++;
             System.out.print(paraulesDesordenades[pos] + " ");
         }
-        System.out.println("");*/
+        System.out.println("");
+*/
     }
 }
