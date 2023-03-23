@@ -28,6 +28,7 @@ public class Ex659_NumerosJeroglificos {
             while (nombre > 0)
             {
                 //1922
+                // Opció 1
                 /*
                 if (nombre >= 1000000) 
                 {
@@ -65,6 +66,14 @@ public class Ex659_NumerosJeroglificos {
                     nombre--;
                 }*/
                 
+                // Opció 2
+                for (int i = 0; i < valores.length; i++) {
+                    if (nombre >= valores[i]) 
+                    {
+                        System.out.print(simbolos[i]);
+                        nombre -= valores[i];
+                    }
+                }                
                 
             }
             System.out.println("");

@@ -42,10 +42,10 @@ public class Ex12_AnyDeTraspas {
             missatge = "NO";*/
         
         //String missatge = anyTraspas ? "SI" : "NO";
-        System.out.println((any % 4 == 0) && (any % 100 != 0 && (any % 400 == 0))
+        System.out.println((any % 4 == 0) && (any % 100 != 0 || (any % 400 == 0))
                            ? "SI" : "NO");
         
-        System.out.println(!(any % 4 == 0) || (any % 100 == 0 || (any % 400 != 0))
+        System.out.println(!(any % 4 == 0) || (any % 100 == 0 && (any % 400 != 0))
                            ? "NO" : "SI");
         
         
